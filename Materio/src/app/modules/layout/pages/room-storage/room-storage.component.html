@@ -1,0 +1,15 @@
+<div class="icon">
+  <mat-icon (click)="crossClick()">highlight_off</mat-icon>
+</div>
+<form [formGroup]="roomForm" class="room">
+  <label>Enter Room Name</label>
+
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Placeholder" formControlName="roomName">
+    <mat-error *ngIf="formControl.roomName?.hasError('required')" class="error">{{errorMsg.GROUP_NAME_REQ}}</mat-error>
+    <mat-error *ngIf="formControl.roomName?.hasError('pattern')" class="error">{{errorMsg.GROUP_PATTERN}}</mat-error>
+    <mat-error *ngIf="formControl.roomName.errors?.minlength" class="error">{{errorMsg.GROUP_LENGTH_MIN}}</mat-error>
+    <mat-error *ngIf="formControl.roomName.errors?.maxlength" class="error">{{errorMsg.MAX_GROUP_LENGTH}}</mat-error>
+  </mat-form-field>
+  <button mat-raised-button (click)="onConfirmClick()" [disabled]="roomForm.invalid">Submit</button>
+</form>

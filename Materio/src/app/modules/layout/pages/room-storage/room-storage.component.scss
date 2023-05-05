@@ -1,0 +1,57 @@
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  margin: -10px;
+  .mat-icon {
+    font-size: 30px;
+    color: #9155fd;
+    cursor: pointer;
+  }
+}
+.room {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 20px;
+  label {
+    font-weight: 700;
+  }
+  .error {
+    font-size: 15px;
+    margin-left: -6px;
+    margin-top: -2px;
+    font-weight: 500;
+  }
+  button {
+    width: 250px;
+    margin: auto;
+    background-color: #9155fd;
+    color: white;
+    padding: 5px 10px;
+    font-size: 20px;
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #bfb6d1;
+    }
+  }
+}
+::ng-deep .mat-dialog-container {
+  border: 3px solid #9155fd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 750px) {
+  .room {
+    width: auto;
+  }
+}
+@media only screen and (max-width: 430px) {
+  .room {
+   button{
+    width: auto;
+    margin-top: 25px;
+
+   }
+  }
+}

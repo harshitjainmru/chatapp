@@ -1,0 +1,18 @@
+  <section>
+    <div class="icon">
+      <i class="fa-regular fa-circle-question"></i>
+      <mat-icon class="crossIcon" (click)="cancel()">close</mat-icon>
+    </div>
+    <div class="header">
+      <h1 mat-dialog-title class="dialog-title">{{ data.title}}</h1>
+    </div>
+    <div mat-dialog-content class="mainContent">
+      <p class="dialog-message">{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions class="actionBtn">
+      <button class="btn btn-confirm" (click)="confirm()">{{ data.confirmText }}</button>
+      <button class="btn btn-cancel" (click)="cancel()">{{ data.cancelText }}</button>
+    </div>
+  </section>
+
+

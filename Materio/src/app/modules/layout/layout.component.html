@@ -1,0 +1,135 @@
+<div class="main_container">
+  <div class="container">
+    <div class="list">
+      <div class="head">
+        <div class="iconMain">
+          <p class="text">Materio</p>
+          <!-- <app-search-icon></app-search-icon>-->
+          <div [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menuDiv">
+            <mat-icon class="circle">account_circle</mat-icon>
+            <p class="logInUserName">{{this.storeService.getUserInfo.name | titlecase}}</p>
+          </div>
+          <mat-menu #menu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon class="folderIcon">logout</mat-icon>
+              <span class="menuContent">logout</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="chatList">
+          <div class="add_circle">
+            <p class="roomTitle">Messages</p>
+            <div class="group" [matMenuTriggerFor]="groupMenu">
+              <mat-icon class="groupIcon">group_add</mat-icon>
+              <p class="newgroup">Groups</p>
+            </div>
+            <mat-menu #groupMenu="matMenu">
+              <button mat-menu-item (click)="openDialog()">
+                <mat-icon class="folderIcon">create_new_folder</mat-icon>
+                <span class="menuContent">Create Group</span>
+              </button>
+              <button mat-menu-item [matMenuTriggerFor]="availableGroups">
+                <mat-icon class="folderIcon">folder</mat-icon>
+                <span class="menuContent">Available Groups</span>
+              </button>
+            </mat-menu>
+            <mat-menu #availableGroups="matMenu" class="availGrp">
+              <div class="groupInfo" *ngFor="let item of availableGroup">
+                <span mat-menu-item (click)="openGroup(item)" style="display:flex;">
+                  <mat-icon class="folderIcon undefinedIcon">folder</mat-icon>
+                  <span class="menuContent roomName" >{{item?.roomName | titlecase}}</span>
+                </span>
+              </div>
+              <span *ngIf="!availableGroup.length" class="menuContent">No group available</span>
+            </mat-menu>
+          </div>
+          <p *ngIf="!contactList.length && !userDetails.length" class="noActive">No active User.</p>
+          <mat-selection-list [multiple]="false" *ngIf="userlist">
+            <mat-list-option *ngFor="let contact of contactList" [value]="contact" (click)="onSelect(contact)">
+              <div class="icon">
+                <mat-icon style="font-size:35px ; color:#9155fd">supervised_user_circle</mat-icon>
+                <p style="margin-top: 10px;"> {{contact?.roomName | titlecase}} </p>
+              </div>
+            </mat-list-option>
+            <mat-list-option *ngFor="let item of userDetails" [value]="item" (click)="selectUserHandler(item)">
+              <div class="icon" *ngIf="iconShow">
+                <mat-icon style="font-size:35px ; color:#9155fd">account_circle</mat-icon>
+                <p style="margin-top: 10px;"> {{item.name | titlecase}}</p>
+              </div>
+
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+        <div class="onlineUser">
+          <h5></h5>
+          <!-- <h5>Online Users: {{numberOfOnlineUsers}}</h5> -->
+        </div>
+
+      </div>
+    </div>
+    <!-- <div class="box1"  *ngIf="!groupMessage[chatData?.roomName] || !privateMessage[chatData]">
+      <img class="box1" src="../../../assets/HluF7g.jpg">
+    </div> -->
+
+    <div class="box">
+      <div class="header" *ngIf="on_Selection">
+        <div class="chatTitle">
+
+          <mat-icon class="boxCircle">account_circle</mat-icon>
+          <p class="Title">{{chatData?.roomName || chatData?.name |titlecase}}</p>
+
+        </div>
+        <mat-icon class="vertIcon" [matMenuTriggerFor]="group" *ngIf="chatData.roomName && showChat">more_vert
+        </mat-icon>
+        <mat-menu #group="matMenu">
+          <button mat-menu-item (click)="leaveGroup(chatData)">
+            <mat-icon></mat-icon>
+            <span>Leave Group</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="messages">
+
+        <div *ngFor="let item of messageArray.reverse()" class="mainMessage"
+          [ngClass]="item.name=== newUserName ? 'right' :'left'">
+          <span class="name">
+            {{item.name | titlecase}}
+          </span>
+          <!-- {{item.message.length}} -->
+          <span class="readlessMore">
+            <!-- class="textenter" -->
+            <span [ngClass]="item.message.length <= 38 ? 'textenter' : 'textenter1'">
+              <app-moreless [text]="item.message" [wordLimit]="25"></app-moreless>
+            </span>
+          </span>
+
+        </div>
+        <div *ngFor="let item of joinUser">
+          <p class="joinMessage">{{item.message}}</p>
+        </div>
+
+
+      </div>
+      <form [formGroup]="messageForm" class="input-div" *ngIf="on_Selection">
+        <div class="messagebox" *ngIf="showChat">
+          <textarea type="text" placeholder="Message" formControlName="message" class="inputMessage" matInput
+            cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+            (keydown.enter)="submitMessage()"></textarea>
+
+          <span class="sendIcon">
+            <mat-icon (click)="submitMessage()">send</mat-icon>
+          </span>
+
+        </div>
+        <div class="messagebox leaveMessage" *ngIf="!showChat">
+          You leaved the group.
+        </div>
+        <!-- <div class="messagebox leaveMessage" *ngIf="!userDetails.length && !showPrivateChat">
+          User leaved the chat.
+        </div> -->
+        <!-- <mat-error *ngIf="formControl.message?.hasError('maxlength')" class="error">{{errorMsg.CHAT_MAX_LENGTH}}
+        </mat-error> -->
+      </form>
+    </div>
+  </div>
+</div>

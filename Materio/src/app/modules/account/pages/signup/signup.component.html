@@ -1,0 +1,55 @@
+<section>
+  <div class="card">
+    <div class="welcome">
+      <h3 class="welcome-title">Adventure starts here 🚀</h3>
+      <p class="para sigin">Make your app management easy and fun!</p>
+    </div>
+    <div class="form">
+      <form [formGroup]="SignupForm" (submit)="loginHandler()">
+        <div class="formFields">
+          <mat-form-field appearance="outline" >
+            <mat-label>Username</mat-label>
+            <input formControlName="name"  matInput required>
+            <mat-error *ngIf="formControl.name.hasError('required')">{{errorMsg.NAME_REQ}}</mat-error>
+            <mat-error *ngIf="formControl.name.hasError('pattern')">{{errorMsg.NAME_PATTERN}}</mat-error>
+            <mat-error *ngIf="this.SignupForm.controls.name.errors?.minlength">{{errorMsg.NAME_LENGTH_MIN}}</mat-error>
+            <mat-error *ngIf="formControl.name.errors?.maxlength">{{errorMsg.NAME_LENGTH_MAX}}</mat-error>
+
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" (keydown.space)="$event.preventDefault()" matInput required>
+            <mat-error *ngIf="formControl.email.hasError('required')">{{errorMsg.EMAIL_REQ}}</mat-error>
+            <mat-error *ngIf="formControl.email.hasError('pattern')">{{errorMsg.INVALID__EMAIL}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" (keydown.space)="$event.preventDefault()"
+              [type]="hide ? 'password' : 'text'" required>
+            <mat-icon class="pointer" matSuffix (click)="hide = !hide">
+              <span>{{hide ? 'visibility_off' : 'visibility'}}</span>
+            </mat-icon>
+            <mat-error *ngIf="formControl.password.hasError('required')">{{errorMsg.PASSWORD_REQ}}
+            </mat-error>
+            <mat-error *ngIf="formControl.password.hasError('pattern')">{{errorMsg.PASSWORD_INVALID}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <button class="login-btn" type="submit" [disabled]="SignupForm.invalid">Sign up</button>
+        <!-- <div class="new-user">
+          <p class="para">Already have an account?</p>
+          <p class="createAccount" [routerLink]="['ABS_ACCOUNT_LOGIN' | absoluteRouting]">Sign in instead</p>
+        </div> -->
+        <div class="separator">
+          <p class="or-separator">or</p>
+        </div>
+        <div class="social-icons">
+          <img src="../../../../../assets/svg-images/icons8-facebook.svg">
+          <img src="../../../../../assets/svg-images/icons8-twitter.svg">
+          <img src="../../../../../assets/svg-images/icons8-linkedin.svg">
+          <img src="../../../../../assets/svg-images/icons8-google.svg">
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+@import "../login/login.component.scss";
+
+section{
+  .card{
+    width: 420px;
+  }
+}
+
+@media only screen and (max-width:510px) {
+  section{
+    .card{
+      width: 300px;
+    }
+  }
+}
+@media only screen and (max-width:390px) {
+  section{
+    .card{
+      width: 190px;
+    }
+  }
+}
+

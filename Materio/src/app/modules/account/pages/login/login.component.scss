@@ -1,0 +1,90 @@
+@import "../../../../SCSS/btn";
+@import "../../../../SCSS/matFormfield-outline";
+
+.loginSection {
+  .loginCard {
+    height: 600px;
+    margin-top: 30px;
+  }
+}
+section {
+  .para {
+    color: rgba(58, 53, 65, 0.68);
+  }
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    .welcome-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    .sigin {
+      margin-top: -15px;
+      letter-spacing: 1.5px;
+    }
+  }
+  .form {
+    margin-top: 20px;
+    .formFields {
+      display: flex;
+      flex-direction: column;
+    }
+    .forgot {
+      display: flex;
+      justify-content: flex-end;
+
+      .forgot-pass {
+        color: $color;
+        letter-spacing: 1.5px;
+        margin-top: -6px;
+        cursor: pointer;
+      }
+    }
+    .new-user {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      letter-spacing: 1px;
+      .createAccount {
+        color: $color;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+
+    .separator {
+      .or-separator {
+        display: flex;
+        text-align: center;
+        border: 0;
+        margin: 0.5rem 0;
+        margin-top: 1.25rem;
+        &::before,
+        &::after {
+          position: relative;
+          width: 50%;
+          border-top: thin solid rgba(58, 53, 65, 0.12);
+          top: 50%;
+          content: "";
+          transform: translateY(50%);
+          margin: 0;
+        }
+      }
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    .icon {
+      margin-top: 25px;
+    }
+    mat-error {
+      margin-left: -9px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: -2px;
+    }
+  }
+}
